@@ -1,0 +1,24 @@
+alias update_tags="git tag -l | xargs git tag -d && git fetch -t"
+alias cmakeclean="cmake --build . --target clean"
+
+alias tc="find . -type f -exec touch {} +"
+
+alias rr="sbatch wrf_test.sh"
+alias rre="sbatch real.sh"
+alias nm="nano namelist.input"
+alias nn="nano rsl.out.0000"
+alias ne="nano rsl.error.0000"
+alias te="tail rsl.error.* -n 50 | less"
+
+alias tt="tail -f rsl.out.0000"
+
+alias cc="./compile em_real"
+
+alias kk="scancel $(squeue | grep wrf_test | grep -P -o '[0-9]{8}')"
+alias sq="squeue"
+
+alias rrr="mpirun -np $SLURM_NTASKS ./wrf.exe &"
+alias kkk="killall wrf.exe"
+
+alias d02="cp namelist.input.d02 namelist.input"
+alias d01="cp namelist.input.d01 namelist.input"

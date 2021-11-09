@@ -1,0 +1,13 @@
+{
+	"font_face": "Ubuntu Mono",
+	"font_size": 12,
+	"word_wrap": true,
+	"line_padding_top": 1,
+	"line_padding_bottom": 1,
+	"highlight_line": true,
+	"always_show_minimap_viewport": true,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+}
