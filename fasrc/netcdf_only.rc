@@ -1,0 +1,2 @@
+module purge
+module load intel/17.0.4-fasrc01 mvapich2/2.3b-fasrc02 ncview/2.1.7-fasrc01 ncl_ncarg/6.4.0-fasrc01

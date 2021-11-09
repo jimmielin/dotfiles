@@ -1,0 +1,81 @@
+module purge
+module load git/2.17.0-fasrc01
+module load intel/17.0.4-fasrc01
+module load openmpi/2.1.0-fasrc02
+module load netcdf/4.5.0-fasrc02
+module load netcdf-fortran/4.4.4-fasrc06
+module load jasper/1.900.1-fasrc02
+module load cmake/3.12.1-fasrc01
+module load ncl_ncarg/6.4.0-fasrc01
+module load nco/4.7.4-fasrc01
+
+export CC=icc
+export OMPI_CC=$CC
+
+export CXX=icpc
+export OMPI_CXX=$CXX
+
+export FC=ifort
+export F77=$FC
+export F90=$FC
+export OMPI_FC=$FC
+export COMPILER=$FC
+export ESMF_COMPILER=intel
+
+# MPI Communication
+export ESMF_COMM=openmpi
+export MPI_ROOT=$MPI_HOME
+
+
+export NETCDF=/n/holyscratch01/jacob_lab/hplin/wrfgc
+export JASPERLIB=$JASPER_HOME/lib64
+export JASPERINC=$JASPER_HOME/include
+
+# WRF options
+export WRF_EM_CORE=1
+export WRF_NMM_CORE=0
+export WRF_CHEM=1
+
+
+# GC extras (only for GC not WRF-GC)
+export OMP_STACKSIZE=1000000000
+export KMP_STACKSIZE=$OMP_STACKSIZE
+
+# Base paths
+export GC_BIN="$NETCDF_HOME/bin"
+export GC_INCLUDE="$NETCDF_HOME/include"
+export GC_LIB="$NETCDF_HOME/lib"
+
+# Add to primary path
+#export PATH=${NETCDF_HOME}/bin:$PATH
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${NETCDF_HOME}/lib
+
+# If using NetCDF after the C/Fortran split (4.3+), then you will need to
+# specify the following additional environment variables
+export GC_F_BIN="$NETCDF_FORTRAN_HOME/bin"
+export GC_F_INCLUDE="$NETCDF_FORTRAN_HOME/include"
+export GC_F_LIB="$NETCDF_FORTRAN_HOME/lib"
+
+
+# Aliases for convenience
+alias wd="cd /n/holyscratch01/jacob_lab/hplin/wrfgc/WRFV3_dev/run/"
+alias wps="cd /n/holyscratch01/jacob_lab/hplin/wrfgc/WPS/"
+alias rr="sbatch wrf_test.sh"
+alias rre="sbatch real.sh"
+alias nm="nano namelist.input"
+alias nn="nano rsl.out.0000"
+alias ne="nano rsl.error.0000"
+alias te="tail rsl.error.* -n 50 | less"
+
+alias tt="tail -f rsl.out.0000"
+
+alias cc="./compile em_real"
+
+alias kk="scancel $(squeue | grep wrf_test | grep -P -o '[0-9]{8}')"
+alias sq="squeue"
+
+alias rrr="mpirun -np $SLURM_NTASKS ./wrf.exe &"
+alias kkk="killall wrf.exe"
+
+alias d02="cp namelist.input.d02 namelist.input"
+alias d01="cp namelist.input.d01 namelist.input"
