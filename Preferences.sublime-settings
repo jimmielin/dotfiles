@@ -13,4 +13,7 @@
 	"color_scheme": "Mariana.sublime-color-scheme",
 	"show_encoding": true,
 	"trim_trailing_white_space_on_save": true
+
+	// override default macOS sublime text setting
+	"find_selected_text": true
 }
