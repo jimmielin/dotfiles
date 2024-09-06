@@ -1,0 +1,50 @@
+%YAML 1.2
+---
+# .meta syntax
+name: CCPP Metadata
+file_extensions: [meta]
+scope: source.ccpp-meta
+
+contexts:
+  main:
+    - match: '^\['
+      push:
+        - meta_scope: entity.name.variable.ccpp-meta
+        - match: '\]'
+          pop: true
+        - match: '[^\]]+'
+
+    - match: '^\s*(units|type|dimensions|intent)\s*='
+      captures:
+        1: keyword.other.ccpp-meta
+
+    - match: '^\s*(standard_name)\s*='
+      captures:
+        1: keyword.other.ccpp-meta
+      push:
+        - match: $
+          pop: true
+        - include: values
+
+    - match: '\benter_standard_name_\d+\b'
+      scope: invalid.illegal.ccpp-meta
+
+    - match: '\benter_units\b'
+      scope: invalid.illegal.ccpp-meta
+
+    - match: '\b(real|integer|logical|character)\b'
+      scope: storage.type.ccpp-meta
+
+    - match: '\b(in|out|inout)\b'
+      scope: storage.modifier.ccpp-meta
+
+    - match: '\bkind_phys\b'
+      scope: support.constant.ccpp-meta
+
+  values:
+    - match: '\benter_standard_name_\d+\b'
+      scope: invalid.illegal.ccpp-meta
+    - match: '\benter_units\b'
+      scope: invalid.illegal.ccpp-meta
+    - match: '\b[a-z_][a-z0-9_]*\b'
+      scope: markup.italic.ccpp-meta
