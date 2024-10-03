@@ -1,0 +1,17 @@
+alias cb "./case.build -v"
+alias cs "./case.submit"
+alias scratch "cd /scratch/cluster/hplin"
+alias qs "qstat"
+alias testgrep "grep -v PASS | grep -v MEMCOMP | grep -v TPUTCOMP"
+alias cprnc "/fs/cgd/csm/tools/cime/tools/cprnc/cprnc"
+
+module load lang/python/3.11.5
+
+# autocomplete features
+set autoexpand
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
+
+# git prompt
+alias __git_current_branch 'git rev-parse --abbrev-ref HEAD >& /dev/null && echo "{`git rev-parse --abbrev-ref HEAD`}"'
+alias precmd 'set prompt="%n@%m[%c2]`__git_current_branch` "'
